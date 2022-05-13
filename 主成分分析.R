@@ -11,15 +11,19 @@ data = data[,-12]
 pca = prcomp(formula = ~ fixed.acidity+volatile.acidity+citric.acid
              +residual.sugar+chlorides+free.sulfur.dioxide
              +total.sulfur.dioxide+density
-             +pH+sulphates+alcohol, data = data)
+             +pH+sulphates+alcohol, data = data, scale = TRUE)
 vars = (pca$sdev)^2 # 從pca中取出標準差(pca$sdev)後再平方，計算variance(特徵值)
 props = vars / sum(vars)#每個主成分的解釋比例 = 各個主成分的特徵值/總特徵值
 cumulative.props = cumsum(props) # 累加前n個主成分的解釋比例
-#取前2個主成份，可以解釋 99.5% 的變異
-cumulative.props[2]
+#取前4個主成份，可以解釋 70.8% 的變異
+cumulative.props[4]
+# 使用plot()函式 畫陡坡圖
+plot(pca, # 放pca
+     type="line", # 用直線連結每個點
+     main="Scree Plot for GSP raw", col = "darkred") # 主標題
+abline(h=1, col="orange")#BY 
 # 累積解釋比例圖
 plot(cumulative.props, pch = 16, col = "darkred")
-abline(h=0.995, col="orange")
 
 top2 = pca$x[, 1:2]
 top2.ev = pca$rotation[,1:2]
