@@ -1,10 +1,7 @@
-library(corrplot)#相關係數圖
 #資料讀取與初步剖析
-data = read.csv("C:\\Users\\user\\Desktop\\多變量報告\\data\\cellphone.csv")
+data = read.csv("C:\\Users\\user\\Desktop\\多變量報告\\data\\winequality-red.csv")
 sum(is.na(data))#遺失值
-data.corr = cor(data[-21])
-corrplot(data.corr)
-tdata = data[,-21]
+tdata = data[,-12]
 
 #群集分析
 #階層式分群
