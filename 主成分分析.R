@@ -33,5 +33,5 @@ tpca = top2.ev[,3]
 fopca = top2.ev[,4]
 dotchart(fpca[order(fpca, decreasing = FALSE)], col="red", main = "第一主成份", pch)
 dotchart(spca[order(spca, decreasing = FALSE)], col="red", main = "第二主成份")
-dotchart(fpca[order(tpca, decreasing = FALSE)], col="red", main = "第三主成份", pch)
+dotchart(fpca[order(tpca, decreasing = FALSE)], col="red", main = "第三主成份")
 dotchart(spca[order(fopca, decreasing = FALSE)], col="red", main = "第四主成份")
