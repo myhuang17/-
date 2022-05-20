@@ -13,8 +13,12 @@ write.csv(datasum, "C:\\Users\\user\\Desktop\\多變量報告\\data\\敘述統�
 W = NULL
 pvalue = NULL
 for (i in 1:length(data)) {
+  #SHAPRIO
   W[i] = shapiro.test(data[,i])$statistic#12個變數都不是常態分佈
   pvalue[i] = shapiro.test(data[,i])$p.value#12個變數都不是常態分佈
+  #KS
+  W[i] = ks.test(data[,i], "pnorm", mean=mean(data[,i]), sd=sd(data[,i]))$statistic#12個變數都不是常態分佈
+  pvalue[i] = ks.test(data[,i], "pnorm", mean=mean(data[,i]), sd=sd(data[,i]))$p.value#12個變數都不是常態分佈
 }
 dist = cbind(W,pvalue)
 #2. 相關係數檢定
