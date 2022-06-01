@@ -1,0 +1,16 @@
+library(pacman)
+library(caret)
+library(rpart)
+library(tree)
+library(randomForest)
+library(caTools)
+data = read.csv("C:\\Users\\user\\Desktop\\多變量報告\\data\\winequality-red.csv")
+#data$quality = as.character(data$quality)
+set.seed(1)
+data$quality <- as.factor(data$quality)
+inTrain <- createDataPartition(data$quality, p=.9, list = F)
+train <- data[inTrain,]
+valid <- data[-inTrain,]
+rf_model = randomForest(quality~., train)
+rf_result <- predict(rf_model, newdata = valid[,!colnames(valid) %in% c("quality")])
+confusionMatrix(rf_result, valid$quality)
